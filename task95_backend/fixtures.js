@@ -23,7 +23,7 @@ db.once('open', async () => {
     username: 'user1',
     displayName: 'John Doe',
     email: 'johny@test.com',
-    avatar: '',
+    avatar: 'avatar.svg',
     password: '123',
     token: nanoid()
   }, {
