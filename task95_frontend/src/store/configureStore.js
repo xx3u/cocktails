@@ -1,11 +1,11 @@
-import { createBrowserHistory } from "history";
-import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import usersReducer from './reducers/usersReducer';
-import cocktailsReducer from './reducers/cocktailsReducer';
-import { connectRouter, routerMiddleware } from "connected-react-router";
-import thunkMiddleware from "redux-thunk";
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { loadFromLocalStorage, saveToLocalStorage } from './localStorage';
-
+import cocktailsReducer from './reducers/cocktailsReducer';
+import usersReducer from './reducers/usersReducer';
+import { rootSaga } from './sagas/index';
 
 export const history = createBrowserHistory();
 
@@ -17,8 +17,10 @@ const rootReducer = combineReducers({
   router: connectRouter(history)
 });
 
+const sagaMiddleware = createSagaMiddleware();
+
 const middleware = [
-  thunkMiddleware,
+  sagaMiddleware,
   routerMiddleware(history)
 ];
 
@@ -27,6 +29,8 @@ const enhancers = composeEnhancers(applyMiddleware(...middleware));
 const persistedState = loadFromLocalStorage();
 
 const store = createStore(rootReducer, persistedState, enhancers);
+
+sagaMiddleware.run(rootSaga);
 
 store.subscribe(() => {
   saveToLocalStorage({
