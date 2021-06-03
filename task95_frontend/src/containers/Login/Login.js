@@ -3,8 +3,9 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FormElement from '../../components/UI/Form/FormElement/FormElement';
-import UserForm from '../../components/UserForm/UserForm';
+import UserForm from '../../components/UI/Form/UserForm/UserForm';
 import { loginUser } from '../../store/actions/usersActions';
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const useStyles = makeStyles(() => ({
   alert: {
@@ -38,6 +39,8 @@ const Login = () => {
     <UserForm
       onSubmit={submitFormHandler}
       title='Sign In'
+      icon={<LockOutlinedIcon/>}
+      maxWidth="xs"
     >
       {error && <Alert
         severity='error'

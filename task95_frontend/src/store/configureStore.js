@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  cockatils: cocktailsReducer,
+  cocktails: cocktailsReducer,
   router: connectRouter(history)
 });
 

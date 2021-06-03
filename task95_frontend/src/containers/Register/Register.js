@@ -1,10 +1,10 @@
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import FileInput from '../../components/UI/FileInput/FileInput';
 import FormElement from '../../components/UI/Form/FormElement/FormElement';
-import UserForm from '../../components/UserForm/UserForm';
+import UserForm from '../../components/UI/Form/UserForm/UserForm';
 import { registerUser } from './../../store/actions/usersActions';
-
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -38,8 +38,7 @@ const Register = () => {
     Object.keys(state).forEach(key => {
       formData.append(key, state[key]);
     });
-    console.log('state in form submit', state)
-    await dispatch(registerUser({...state}));
+    await dispatch(registerUser(formData));
   };
 
   const getFieldError = fieldName => {
@@ -54,6 +53,8 @@ const Register = () => {
     <UserForm
       onSubmit={submitFormHandler}
       title='Sign Up'
+      icon={<LockOutlinedIcon/>}
+      maxWidth="xs"
     >
       <FormElement
         name='username'

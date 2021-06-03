@@ -1,6 +1,5 @@
 import React from "react";
 import { CssBaseline, Avatar, Typography, Grid, Button, Container } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,11 +26,11 @@ const UserForm = (props) => {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth={props.maxWidth}>
       <CssBaseline/>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-            <LockOutlinedIcon/>
+            {props.icon}
         </Avatar>
         <Typography component="h1" variant="h5">
             {props.title}

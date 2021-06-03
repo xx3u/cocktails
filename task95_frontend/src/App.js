@@ -5,6 +5,7 @@ import { Container } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
+import NewCocktail from './containers/NewCocktail/NewCocktail';
 
 const ProtectedRoute = ({ isAllowed, redirectTo, ...props }) => {
   return isAllowed ?
@@ -22,6 +23,13 @@ const App = () => {
       <NotificationContainer />
       <Container maxWidth="xl">
         <Switch>
+          <ProtectedRoute 
+            isAllowed={user !== null}
+            redirectTo={"/login"}
+            path={"/cocktail/new"}
+            exact
+            component={NewCocktail}
+          />
           <ProtectedRoute 
             isAllowed={!user}
             redirectTo={"/"}

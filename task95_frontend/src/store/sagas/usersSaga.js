@@ -1,4 +1,3 @@
-
 import { put } from '@redux-saga/core/effects';
 import { loginUserFailure, loginUserSuccess, logoutUserSuccess, registerUserFailure, registerUserSuccess } from '../actions/usersActions';
 import api from './../../api';

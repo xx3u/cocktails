@@ -21,6 +21,7 @@ const FormElement = (props) => {
                 error={!!props.error}
                 helperText={props.error}
                 InputLabelProps={props.shrink}
+                className={props.className}
             />
         </Grid>
     );

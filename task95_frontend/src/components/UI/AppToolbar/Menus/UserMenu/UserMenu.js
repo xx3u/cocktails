@@ -1,6 +1,7 @@
+import { Avatar, Button, Fade, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { React, useState } from 'react';
-import { Button, IconButton, Menu, MenuItem, Fade, Avatar } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { logoutUser } from './../../../../../store/actions/usersActions';
 
 export const UserMenu = ({ user }) => {
@@ -23,6 +24,23 @@ export const UserMenu = ({ user }) => {
 
   return (
     <>
+      <Button 
+        color="inherit"
+        component={Link}
+        to="/cocktail/new"
+        variant="outlined"
+        style={{ margin: 10}}
+      >
+        Create Cocktail
+      </Button>
+      <Button 
+        color="inherit"
+        component={Link}
+        to="/mycocktails"
+        variant="outlined"
+      >
+        My Cocktails
+      </Button>
       <Button 
         aria-controls='fade-menu'
         aria-haspopup='true'
