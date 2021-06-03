@@ -2,7 +2,8 @@ import api from './../../api';
 import { NotificationManager } from 'react-notifications';
 import { push } from 'connected-react-router';
 import { put } from '@redux-saga/core/effects';
-import { createCocktailFailure, createCocktailSuccess } from '../actions/cocktailsActions';
+import { createCocktailFailure, createCocktailSuccess, getCocktailsFailure } from '../actions/cocktailsActions';
+import { getCocktailsSuccess } from './../actions/cocktailsActions';
 
 export function* createCocktailSaga({ data }) {
   try {
@@ -18,3 +19,12 @@ export function* createCocktailSaga({ data }) {
     }
   }
 };
+
+export function* getCocktailsSaga() {
+  try {
+    const response = yield api.get('/cocktails');
+    yield put(getCocktailsSuccess(response.data));
+  } catch (error) {
+    yield put(getCocktailsFailure(error)); 
+  }
+}

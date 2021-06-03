@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Login from './containers/Login/Login';
 import Register from './containers/Register/Register';
 import NewCocktail from './containers/NewCocktail/NewCocktail';
+import Cocktails from './containers/Cocktails/Cocktails';
 
 const ProtectedRoute = ({ isAllowed, redirectTo, ...props }) => {
   return isAllowed ?
@@ -23,6 +24,7 @@ const App = () => {
       <NotificationContainer />
       <Container maxWidth="xl">
         <Switch>
+          
           <ProtectedRoute 
             isAllowed={user !== null}
             redirectTo={"/login"}
@@ -44,6 +46,7 @@ const App = () => {
             exact
             component={Register}
           />
+          <Route path={"/"} exact component={Cocktails}/>
         </Switch>
       </Container>
     </>
