@@ -1,10 +1,15 @@
 import { takeEvery } from 'redux-saga/effects';
 import { 
-  CREATE_COCKTAIL, 
+  CREATE_COCKTAIL, DELETE_COCKTAIL, PUBLISH_COCKTAIL, 
   GET_COCKTAILS, GET_MY_COCKTAILS,
+  GET_PUBLISHED_COCKTAILS,
   LOGIN_USER, LOGOUT_USER, REGISTER_USER 
 } from './../actionTypes';
-import { createCocktailSaga, getCocktailsSaga, getMyCocktailsSaga } from './cocktailsSaga';
+import { 
+  createCocktailSaga, deleteCocktailSaga, 
+  getCocktailsSaga, getMyCocktailsSaga, 
+  getPublishedCocktailsSaga, publishCocktailSaga 
+} from './cocktailsSaga';
 import { loginUserSaga, logoutUserSaga, registerUserSaga } from './usersSaga';
 
 export function* rootSaga() {
@@ -15,4 +20,7 @@ export function* rootSaga() {
   yield takeEvery(CREATE_COCKTAIL, createCocktailSaga);
   yield takeEvery(GET_COCKTAILS, getCocktailsSaga);
   yield takeEvery(GET_MY_COCKTAILS, getMyCocktailsSaga);
+  yield takeEvery(GET_PUBLISHED_COCKTAILS, getPublishedCocktailsSaga);
+  yield takeEvery(DELETE_COCKTAIL, deleteCocktailSaga);
+  yield takeEvery(PUBLISH_COCKTAIL, publishCocktailSaga);
 }

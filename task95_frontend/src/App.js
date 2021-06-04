@@ -52,7 +52,13 @@ const App = () => {
             exact
             component={Cocktails}
           />
-          <Route path={"/"} exact component={Cocktails}/>
+          <ProtectedRoute 
+            isAllowed={user !== null}
+            redirectTo={"/login"}
+            path={"/"}
+            exact
+            component={Cocktails}
+          />
         </Switch>
       </Container>
     </>

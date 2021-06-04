@@ -5,14 +5,15 @@ import { put } from '@redux-saga/core/effects';
 import { 
   createCocktailFailure, createCocktailSuccess, 
   getCocktailsSuccess, getCocktailsFailure,
-  getMyCocktailsSuccess, getMyCocktailsFailure
+  getMyCocktailsSuccess, getMyCocktailsFailure, 
+  getPublishedCocktailsSuccess, getPublishedCocktailsFailure, deleteCocktailSuccess, deleteCocktailFailure, publishCocktailSuccess, publishCocktailFailure
 } from '../actions/cocktailsActions';
 
 export function* createCocktailSaga({ data }) {
   try {
     yield api.post('/cocktails', data);
     yield put(createCocktailSuccess());
-    yield NotificationManager.success('You successfully created new cocktail');
+    yield NotificationManager.success('Ваш коктейль находится на рассмотрении модератора');
     yield put(push('/mycocktails'));
   } catch (error) {
     if (error.response && error.response.data) {
@@ -35,9 +36,38 @@ export function* getCocktailsSaga() {
 export function* getMyCocktailsSaga() {
   try {
     const response = yield api.get('/cocktails/my');
-    console.log('response.data', response.data)
     yield put(getMyCocktailsSuccess(response.data));
   } catch (error) {
     yield put(getMyCocktailsFailure(error)); 
   }
-}
+};
+
+export function* getPublishedCocktailsSaga() {
+  try {
+    const response = yield api.get('/cocktails/published');
+    yield put(getPublishedCocktailsSuccess(response.data));
+  } catch (error) {
+    yield put(getPublishedCocktailsFailure(error));
+  }
+};
+
+export function* deleteCocktailSaga({id}) {
+  try {
+    const response = yield api.delete(`/cocktails/${id}`);
+    yield put(deleteCocktailSuccess(response.data));
+    yield NotificationManager.success('Коктейль успешно удален');
+    yield put(push('/'));
+  } catch (error) {
+    yield put(deleteCocktailFailure(error));
+  }
+};
+
+export function* publishCocktailSaga({id}) {
+  try {
+    const response = yield api.put(`/cocktails/${id}`);
+    yield put(publishCocktailSuccess(response.data));
+    yield put(push('/'));
+  } catch (error) {
+    yield put(publishCocktailFailure(error));
+  }
+};

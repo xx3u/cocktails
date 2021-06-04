@@ -49,7 +49,8 @@ export const CocktailItem = (props) => {
           <Typography variant="body2" component="p" style={{ marginBottom: 10 }}>
             RECIPE: {props.recipe}
           </Typography>
-        </CardContent>    
+          {props.buttons}
+        </CardContent>
       </Card>
     </Grid>
   )
