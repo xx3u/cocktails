@@ -64,9 +64,9 @@ export function* deleteCocktailSaga({id}) {
 
 export function* publishCocktailSaga({id}) {
   try {
-    const response = yield api.put(`/cocktails/${id}`);
-    yield put(publishCocktailSuccess(response.data));
-    yield put(push('/'));
+    yield api.put(`/cocktails/${id}`);
+    yield put(publishCocktailSuccess());
+    yield put(push('/mycocktails'));
   } catch (error) {
     yield put(publishCocktailFailure(error));
   }

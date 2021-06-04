@@ -27,5 +27,5 @@ export const deleteCocktailSuccess = (data) => ({type: DELETE_COCKTAIL_SUCCESS, 
 export const deleteCocktailFailure = (error) => ({type: DELETE_COCKTAIL_FAILURE, error});
 
 export const publishCocktail = (id) => ({type: PUBLISH_COCKTAIL, id});
-export const publishCocktailSuccess = (data) => ({type: PUBLISH_COCKTAIL_SUCCESS, data});
+export const publishCocktailSuccess = () => ({type: PUBLISH_COCKTAIL_SUCCESS});
 export const publishCocktailFailure = (error) => ({type: PUBLISH_COCKTAIL_FAILURE, error});
