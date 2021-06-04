@@ -12,11 +12,13 @@ const storage = multer.diskStorage({
     cb(null, config.uploadPath);
   },
   filename: (req, file, cb) => {
+    console.log('req', req, 'file', file, 'cb', cb)
     cb(null, nanoid() + path.extname(file.originalname));
   }
 });
 
-const upload = multer({storage});
+// const upload = multer({storage});
+const upload = multer({ dest: './public/uploads/'})
 
 const createRouter = () => {
   router.post('/', upload.single('avatar'), async (req, res) => {

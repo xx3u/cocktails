@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config');
 const users = require('./app/users');
+const cocktails = require('./app/cocktails');
 
 const port = 8000;
 
@@ -18,6 +19,7 @@ const run = async () => {
   app.use(express.static('public'));
   app.use(express.json());
   app.use('/users', users());
+  app.use('/cocktails', cocktails());
 
   app.listen(port, () => {
     console.log(`Server started at port: ${port}`);
