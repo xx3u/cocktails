@@ -4,15 +4,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ListOfIngredients } from "../../components/ListOfIngredients/ListOfIngredients";
 import { getCocktails } from "../../store/actions/cocktailsActions";
 import { CocktailItem } from './../../components/CocktailItem/CocktailItem';
+import { getMyCocktails } from './../../store/actions/cocktailsActions';
 
-const Cocktails = () => {
+const Cocktails = (props) => {
   const cocktails = useSelector(state => state.cocktails.cocktails);
   const dispatch = useDispatch();
-  console.log(cocktails)
-  useEffect(() => {
-    dispatch(getCocktails())
-  }, [dispatch]);
 
+  useEffect(() => {
+    if (props.match.url === '/') {
+      console.log('in /')
+      dispatch(getCocktails())
+    } else if (props.match.url === '/mycocktails') {
+      console.log('in /mycocktails')
+      dispatch(getMyCocktails())
+    }
+  }, [dispatch, props.match.url]);
+
+  console.log('cocktails', cocktails)
   return (
     <Grid container spacing={2}>
       <Grid item container justify="space-between" alignItems="center" style={{marginBottom: 20}}>

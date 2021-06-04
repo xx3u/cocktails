@@ -24,7 +24,6 @@ const App = () => {
       <NotificationContainer />
       <Container maxWidth="xl">
         <Switch>
-          
           <ProtectedRoute 
             isAllowed={user !== null}
             redirectTo={"/login"}
@@ -45,6 +44,13 @@ const App = () => {
             path={"/register"}
             exact
             component={Register}
+          />
+          <ProtectedRoute 
+            isAllowed={user !== null}
+            redirectTo={"/login"}
+            path={"/mycocktails"}
+            exact
+            component={Cocktails}
           />
           <Route path={"/"} exact component={Cocktails}/>
         </Switch>

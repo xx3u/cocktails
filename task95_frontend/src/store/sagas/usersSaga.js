@@ -6,7 +6,6 @@ import { push } from 'connected-react-router';
 
 export function* registerUserSaga({ userData }) {
   try {
-    console.log('userData', userData)
     yield api.post('/users', userData);
     yield put(registerUserSuccess());
     yield NotificationManager.success('You successfully registered');
@@ -26,8 +25,12 @@ export function* loginUserSaga({ userData }) {
     yield put(loginUserSuccess(response.data));
     yield NotificationManager.success('Successful Login');
     yield put(push('/'));
-  } catch(e) {
-    yield put(loginUserFailure(e.response.data));
+  } catch(error) {
+    if (error.response && error.response.data) {
+      yield put(loginUserFailure(error.response.data));
+    } else {
+      yield put(loginUserFailure(error))
+    }
   }
 };
 

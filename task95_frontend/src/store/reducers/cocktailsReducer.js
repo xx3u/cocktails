@@ -1,4 +1,4 @@
-import { CREATE_COCKTAIL_FAILURE, GET_COCKTAILS_FAILURE, GET_COCKTAILS_SUCCESS } from './../actionTypes';
+import { CREATE_COCKTAIL_FAILURE, GET_COCKTAILS_FAILURE, GET_COCKTAILS_SUCCESS, GET_MY_COCKTAILS_SUCCESS, GET_MY_COCKTAILS_FAILURE } from './../actionTypes';
 
 const initialState = {
   cocktails: [],
@@ -12,6 +12,10 @@ const cocktailsReducer = (state = initialState, action) => {
     case GET_COCKTAILS_FAILURE:
       return {...state, error: action.error};
     case CREATE_COCKTAIL_FAILURE:
+      return {...state, error: action.error};
+    case GET_MY_COCKTAILS_SUCCESS:
+      return {...state, cocktails: action.data};
+    case GET_MY_COCKTAILS_FAILURE:
       return {...state, error: action.error};
     default:
       return state;
